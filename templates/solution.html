@@ -1,0 +1,101 @@
+<!-- templates/solution.html -->
+{% extends "base.html" %}
+
+{% block title %}Solution - JEE Mains Math Solver{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2>📊 Solution</h2>
+            <div>
+                <a href="{{ url_for('index') }}" class="btn btn-outline-primary">🔄 Solve Another</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h4 class="mb-0">Step-by-Step Solution</h4>
+                <small>Generated on: {{ timestamp }}</small>
+            </div>
+            <div class="card-body math-container">
+                {{ raw_response_html|safe }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <!-- Solution Summary -->
+        <div class="card">
+            <div class="card-header">
+                <h5>📋 Summary</h5>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <strong>Question:</strong>
+                    <p class="mt-2 p-2 bg-light rounded">{{ solution.question }}</p>
+                </div>
+                
+                {% if solution.topic %}
+                <div class="mb-3">
+                    <strong>Topic:</strong>
+                    <span class="badge bg-primary">{{ solution.topic }}</span>
+                </div>
+                {% endif %}
+                
+                {% if solution.difficulty_level %}
+                <div class="mb-3">
+                    <strong>Difficulty:</strong>
+                    <span class="badge {% if solution.difficulty_level == 'Easy' %}bg-success{% elif solution.difficulty_level == 'Medium' %}bg-warning{% else %}bg-danger{% endif %}">
+                        {{ solution.difficulty_level }}
+                    </span>
+                </div>
+                {% endif %}
+                
+                <div class="final-answer">
+                    <strong>Final Answer:</strong>
+                    <div class="mt-2">{{ solution.final_answer }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Key Steps -->
+        {% if solution.solution_steps %}
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5>🔢 Key Steps</h5>
+            </div>
+            <div class="card-body">
+                {% for step in solution.solution_steps[:3] %}
+                    <div class="solution-step">
+                        {{ loop.index }}. {{ step[:100] }}{% if step|length > 100 %}...{% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Raw Response Toggle -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <button class="btn btn-link p-0" type="button" data-bs-toggle="collapse" data-bs-target="#rawResponse">
+                    🔍 View Raw AI Response
+                </button>
+            </div>
+            <div class="collapse" id="rawResponse">
+                <div class="card-body">
+                    <pre class="bg-light p-3 rounded"><code>{{ solution.dict() | tojson(indent=2) }}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<!-- templates/error.html -->
+{% extends "base.html" %}
+
+{% block title %}Error - JEE Mains Math Solver{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h4>❌ Error</h4>
+            </div>
+            <div class="card-body text-center">
+                <p class="lead">{{ error_message }}</p>
+                <a href="{{ url_for('index') }}" class="btn btn-primary">🏠 Go Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
