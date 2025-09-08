@@ -215,18 +215,3 @@ def not_found(error):
 def internal_error(error):
     return render_template('error.html', error_message="Internal server error"), 500
 
-if __name__ == '__main__':
-    # Check if required environment variables are set
-    if not os.getenv('GEMINI_API_KEY'):
-        logger.error("GEMINI_API_KEY not found in environment variables")
-        print("Please set GEMINI_API_KEY in your .env file")
-        exit(1)
-    
-    # Run the app
-    debug_mode = os.getenv('DEBUG', 'False').lower() == 'true'
-    port = int(os.getenv('PORT', 5000))
-    
-    print(f"Starting JEE Mains Math Solver on port {port}")
-    print("Make sure your .env file contains GEMINI_API_KEY")
-    
-    app.run(debug=debug_mode, host='0.0.0.0', port=port)
