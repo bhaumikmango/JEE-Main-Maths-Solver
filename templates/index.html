@@ -1,0 +1,102 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block title %}JEE Mains Math Solver - Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h2 class="card-title mb-0">🎯 JEE Mains Math Problem Solver</h2>
+            </div>
+            <div class="card-body">
+                <p class="lead">Enter your JEE Mains mathematics question below and get step-by-step solutions powered by AI.</p>
+                
+                <form method="POST" action="{{ url_for('solve_problem') }}" id="questionForm">
+                    <div class="mb-3">
+                        <label for="question" class="form-label">
+                            <strong>Math Question:</strong>
+                        </label>
+                        <textarea 
+                            class="form-control question-input" 
+                            id="question" 
+                            name="question" 
+                            placeholder="Enter your JEE Mains math question here... 
+
+Example: 
+Find the derivative of f(x) = x³ + 2x² - 5x + 1
+
+or
+
+Solve the equation: 2x² - 7x + 3 = 0"
+                            required
+                        ></textarea>
+                        <div class="form-text">
+                            Please enter only the mathematical question. Be as specific as possible for better results.
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg" id="solveBtn">
+                            <span class="submit-text">🚀 Solve Problem</span>
+                            <span class="loading">
+                                <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+                                Solving...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Sample Questions -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5>📚 Sample JEE Mains Questions</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Calculus:</h6>
+                        <ul class="list-unstyled">
+                            <li>• <a href="#" class="sample-question" data-question="Find the derivative of f(x) = x³ sin(x) + e^x cos(x)">Derivative of product functions</a></li>
+                            <li>• <a href="#" class="sample-question" data-question="Evaluate the integral ∫(x² + 3x - 2)dx from 0 to 2">Definite integration</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Algebra:</h6>
+                        <ul class="list-unstyled">
+                            <li>• <a href="#" class="sample-question" data-question="Solve the system: 2x + 3y = 7, 4x - y = 1">System of linear equations</a></li>
+                            <li>• <a href="#" class="sample-question" data-question="Find the roots of 3x² - 5x + 2 = 0">Quadratic equations</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('questionForm').addEventListener('submit', function() {
+    const submitBtn = document.getElementById('solveBtn');
+    const submitText = submitBtn.querySelector('.submit-text');
+    const loading = submitBtn.querySelector('.loading');
+    
+    submitText.style.display = 'none';
+    loading.style.display = 'inline';
+    submitBtn.disabled = true;
+});
+
+// Handle sample questions
+document.querySelectorAll('.sample-question').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const question = this.getAttribute('data-question');
+        document.getElementById('question').value = question;
+    });
+});
+</script>
+{% endblock %}
