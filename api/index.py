@@ -53,6 +53,8 @@ Think deeply and process the request for the answer of the question in a chronol
 1. Return ONLY valid JSON - no trailing commas, code or text in the output
 2. No text before or after the JSON object and the JSON object should be a single, valid block
 3. All strings must be properly escaped
+4. Do not invent or assume facts
+5. If unconfirmed, say : "I do not have that information"
 
 ### Answer Format
 **Question:** [Restate the question and it's understanding clearly]        
@@ -215,3 +217,18 @@ def not_found(error):
 def internal_error(error):
     return render_template('error.html', error_message="Internal server error"), 500
 
+if __name__ == '__main__':
+    # Check if required environment variables are set
+    if not os.getenv('GEMINI_API_KEY'):
+        logger.error("GEMINI_API_KEY not found in environment variables")
+        print("Please set GEMINI_API_KEY in your .env file")
+        exit(1)
+    
+    # Run the app
+    debug_mode = os.getenv('DEBUG', 'False').lower() == 'true'
+    port = int(os.getenv('PORT', 5000))
+    
+    print(f"Starting JEE Mains Math Solver on port {port}")
+    print("Make sure your .env file contains GEMINI_API_KEY")
+    
+    app.run(debug=debug_mode, host='0.0.0.0', port=port)
