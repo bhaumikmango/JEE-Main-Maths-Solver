@@ -13,10 +13,10 @@
             <div class="card-body">
                 <p class="lead">Enter your JEE Mains mathematics question below and get step-by-step solutions powered by AI.</p>
                 
-                <form method="POST" action="{{ url_for('solve_problem') }}" id="questionForm">
+                <form method="POST" action="{{ url_for('solve_problem') }}" id="questionForm" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="question" class="form-label">
-                            <strong>Math Question:</strong>
+                            <strong>Math Question (Type or Upload):</strong>
                         </label>
                         <textarea 
                             class="form-control question-input" 
@@ -29,14 +29,27 @@ Find the derivative of f(x) = x³ + 2x² - 5x + 1
 
 or
 
-Solve the equation: 2x² - 7x + 3 = 0"
-                            required
+Solve the equation: 2x² - 7x + 3 = 0" 
                         ></textarea>
                         <div class="form-text">
                             Please enter only the mathematical question. Be as specific as possible for better results.
                         </div>
                     </div>
-                    
+
+                    <div class="text-center my-3">
+                        <span class="text-muted">OR</span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image_file" class="form-label">
+                            <strong>Upload an Image:</strong>
+                        </label>
+                        <input class="form-control" type="file" id="image_file" name="image_file" accept="image/png, image/jpeg, image/jpg">
+                        <div class="form-text">
+                            Supported formats: .png, .jpeg, .jpg
+                        </div>
+                    </div>
+
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary btn-lg" id="solveBtn">
                             <span class="submit-text">🚀 Solve Problem</span>
@@ -76,11 +89,21 @@ Solve the equation: 2x² - 7x + 3 = 0"
         </div>
     </div>
 </div>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
-document.getElementById('questionForm').addEventListener('submit', function() {
+document.getElementById('questionForm').addEventListener('submit', function(e) {
+    const questionInput = document.getElementById('question');
+    const imageInput = document.getElementById('image_file');
+    
+    if (!questionInput.value.trim() && !imageInput.files.length) {
+        alert('Please enter a math question or upload an image.');
+        e.preventDefault();
+        return;
+    }
+
     const submitBtn = document.getElementById('solveBtn');
     const submitText = submitBtn.querySelector('.submit-text');
     const loading = submitBtn.querySelector('.loading');
@@ -96,7 +119,21 @@ document.querySelectorAll('.sample-question').forEach(function(link) {
         e.preventDefault();
         const question = this.getAttribute('data-question');
         document.getElementById('question').value = question;
+        document.getElementById('image_file').value = ''; // Clear file input
     });
+});
+
+document.getElementById('question').addEventListener('input', function() {
+    if (this.value) {
+        document.getElementById('image_file').required = false;
+    }
+});
+
+document.getElementById('image_file').addEventListener('change', function() {
+    if (this.files.length) {
+        document.getElementById('question').required = false;
+        document.getElementById('question').value = ''; // Clear text input
+    }
 });
 </script>
 {% endblock %}

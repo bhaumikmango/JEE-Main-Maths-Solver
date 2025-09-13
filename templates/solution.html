@@ -78,7 +78,7 @@
             <div class="card-body">
                 {% for step in solution.solution_steps[:3] %}
                     <div class="solution-step">
-                        {{ loop.index }}. {{ step[:100] }}{% if step|length > 100 %}...{% endif %}
+                        {{ step[:100] }}{% if step|length > 100 %}...{% endif %}
                     </div>
                 {% endfor %}
             </div>
