@@ -1,5 +1,6 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.10.11-slim-buster 
+# Use a stable and widely supported Python version.
+# 3.10.11 has pre-built wheels for most packages.
+FROM python:3.10.11-slim-buster
 
 # Set the working directory in the container
 WORKDIR /app
@@ -15,13 +16,15 @@ RUN python -m venv $VIRTUAL_ENV
 COPY requirements.txt .
 
 # Install the Python dependencies into the virtual environment
-RUN pip install --no-cache-dir -r requirements.txt 
+# The --no-cache-dir flag is recommended for Docker builds
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
 COPY . .
 
-# Expose the port your Flask app runs on (default for Gunicorn is 8000)
-EXPOSE 8000
+# Expose the port your Flask app runs on
+EXPOSE 5000
 
 # Command to run the application using Gunicorn from within the virtual environment
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
+# The port is set to 5000 as per your request
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
