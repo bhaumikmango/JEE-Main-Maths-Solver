@@ -279,7 +279,7 @@ if __name__ == '__main__':
     
     # Run the app
     debug_mode = os.getenv('DEBUG', 'False').lower() == 'true'
-    port = int(os.getenv('PORT', 5000))
+    port = int(os.getenv('PORT', 8000))
     
     print(f"Starting JEE Mains Math Solver on port {port}")
     print("Make sure your .env file contains GEMINI_API_KEY")

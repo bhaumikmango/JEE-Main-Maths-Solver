@@ -23,8 +23,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose the port your Flask app runs on
-EXPOSE 5000
+EXPOSE 8000
 
 # Command to run the application using Gunicorn from within the virtual environment
-# The port is set to 5000 as per your request
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
+# The port is set to 8000 as per your request
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
