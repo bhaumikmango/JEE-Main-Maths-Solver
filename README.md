@@ -95,3 +95,74 @@ From `requirements.txt`:
 ```bash
 git clone https://github.com/your-username/jee-mains-maths-solver.git
 cd jee-mains-maths-solver
+```
+2. Create Virtual Environment
+`python -m venv venv`
+`source venv/bin/activate`   # Mac/Linux
+`venv\Scripts\activate`      # Windows
+
+3. Install Dependencies
+`pip install -r requirements.txt`
+
+4. Environment Variables
+
+Create a .env file in the root directory:
+
+```
+GEMINI_API_KEY=your_api_key_here
+SECRET_KEY=your_flask_secret
+DEBUG=True
+PORT=8000
+```
+
+5. Run Locally
+`python app.py`
+
+
+`Visit http://localhost:8000.`
+
+📡 API Usage
+Endpoint
+
+POST /api/solve
+
+Request
+{
+  "question": "Find the derivative of f(x) = x^3 + 2x^2 - 5x + 1"
+}
+
+Response
+{
+  "success": true,
+  "solution": {
+    "question": "Find the derivative of f(x) = x^3 + 2x^2 - 5x + 1",
+    "solution_steps": [
+      "Step 1: Apply the Power Rule",
+      "Step 2: Differentiate each term",
+      "Step 3: Combine results"
+    ],
+    "final_answer": "f'(x) = 3x^2 + 4x - 5",
+    "difficulty_level": "Easy",
+    "topic": "Calculus"
+  }
+}
+
+🏗️ System Design Overview
+User Input (Text / Image)
+        │
+        ▼
+   Flask Backend
+        │
+ ┌──────┴──────────┐
+ │ Text Input      │
+ │  → Gemini       │
+ │                 │
+ │ Image Input     │
+ │  → Pillow → Gemini (OCR+Solve) 
+ └──────┬──────────┘
+        ▼
+  JSON Validation (Pydantic)
+        ▼
+   Markdown → HTML
+        ▼
+   Frontend Templates (Bootstrap, KaTeX, Highlight.js)
