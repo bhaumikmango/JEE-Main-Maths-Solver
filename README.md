@@ -96,15 +96,15 @@ From `requirements.txt`:
 git clone https://github.com/your-username/jee-mains-maths-solver.git
 cd jee-mains-maths-solver
 ```
-2. Create Virtual Environment
+### 2. Create Virtual Environment
 `python -m venv venv`
 `source venv/bin/activate`   # Mac/Linux
 `venv\Scripts\activate`      # Windows
 
-3. Install Dependencies
+### 3. Install Dependencies
 `pip install -r requirements.txt`
 
-4. Environment Variables
+### 4. Environment Variables
 
 Create a .env file in the root directory:
 
@@ -115,22 +115,25 @@ DEBUG=True
 PORT=8000
 ```
 
-5. Run Locally
+### 5. Run Locally
 `python app.py`
 
 
 `Visit http://localhost:8000.`
 
-📡 API Usage
-Endpoint
+## 📡 API Usage
 
-POST /api/solve
+### Endpoint
 
+`POST /api/solve`
+
+```
 Request
 {
   "question": "Find the derivative of f(x) = x^3 + 2x^2 - 5x + 1"
 }
-
+```
+```
 Response
 {
   "success": true,
@@ -146,8 +149,11 @@ Response
     "topic": "Calculus"
   }
 }
+```
 
-🏗️ System Design Overview
+## 🏗️ System Design Overview
+
+```
 User Input (Text / Image)
         │
         ▼
@@ -166,3 +172,4 @@ User Input (Text / Image)
    Markdown → HTML
         ▼
    Frontend Templates (Bootstrap, KaTeX, Highlight.js)
+```
