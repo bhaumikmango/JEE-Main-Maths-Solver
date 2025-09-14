@@ -173,3 +173,9 @@ Response
                   ▼
 Frontend Templates (Bootstrap, KaTeX, Highlight.js)
 ```
+
+## 👨‍💻 Author
+
+Developed by [Bhaumik Yadav](https://www.linkedin.com/in/theprofessional-bhaumik-yadav/) 
+
+⭐ If you found this project helpful, feel free to give it a star!
