@@ -154,22 +154,22 @@ Response
 ## 🏗️ System Design Overview
 
 ```
-User Input (Text / Image)
-        │
-        ▼
-   Flask Backend
-        │
- ┌──────┴──────────┐
- │ Text Input      │
- │  → Gemini       │
- │                 │
- │ Image Input     │
- │  → Pillow → Gemini (OCR+Solve) 
- └──────┬──────────┘
-        ▼
-  JSON Validation (Pydantic)
-        ▼
-   Markdown → HTML
-        ▼
-   Frontend Templates (Bootstrap, KaTeX, Highlight.js)
+         User Input (Text / Image)
+                  │
+                  ▼
+            Flask Backend
+                  │
+    ┌─────────────┴─────────────────┐
+    │         Text Input            │
+    │          → Gemini             │
+    │                               │
+    │         Image Input           │
+    │ → Pillow → Gemini (OCR+Solve) │
+    └─────────────┬─────────────────┘
+                  ▼
+        JSON Validation (Pydantic)
+                  ▼
+             Markdown → HTML
+                  ▼
+Frontend Templates (Bootstrap, KaTeX, Highlight.js)
 ```
