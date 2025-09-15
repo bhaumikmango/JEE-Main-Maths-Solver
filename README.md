@@ -121,6 +121,8 @@ PORT=8000
 
 `Visit http://localhost:8000.`
 
+---
+
 ## 📡 API Usage
 
 ### Endpoint
@@ -151,6 +153,8 @@ Response
 }
 ```
 
+---
+
 ## 🏗️ System Design Overview
 
 ```
@@ -173,6 +177,8 @@ Response
                   ▼
 Frontend Templates (Bootstrap, KaTeX, Highlight.js)
 ```
+
+---
 
 ## 👨‍💻 Author
 
