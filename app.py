@@ -36,7 +36,7 @@ class MathSolution(BaseModel):
 
 class JEEMathSolver:
     def __init__(self):
-        self.model = genai.GenerativeModel('gemini-2.0-flash')
+        self.model = genai.GenerativeModel('gemini-2.5-flash')
         
     def create_prompt(self, question: str) -> str:
         """Create a structured prompt for JEE Mains math problems"""
@@ -159,7 +159,7 @@ def solve_problem_from_image(image_file):
         ]
         
         # Generate content from the model
-        response = genai.GenerativeModel('gemini-1.5-flash').generate_content(prompt)
+        response = genai.GenerativeModel('gemma-3-27b-it').generate_content(prompt)
         extracted_text = response.text.strip()
         
         if not extracted_text:
